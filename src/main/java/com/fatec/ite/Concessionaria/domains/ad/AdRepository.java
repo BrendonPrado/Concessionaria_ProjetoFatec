@@ -12,6 +12,6 @@ public interface AdRepository extends GenericRepository<Ad> {
 
     List<Ad> findByAdStatus(AdStatus adStatus);
 
-    @Query("from Ad as a where a.price > :preco")
-    List<Ad> pegarMaiorQuePreco(double preco);
+    @Query("select a from Ad as a where a.price > :preco")
+    List<Ad> pegarMaiorPrecoQue(double preco);
 }

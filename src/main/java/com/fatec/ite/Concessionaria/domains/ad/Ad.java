@@ -23,8 +23,10 @@ public class Ad {
     @ManyToOne(fetch = FetchType.EAGER,optional = false)
     private Car car;
 
+    @Column(nullable = false)
     private double price;
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private AdStatus adStatus;
 }

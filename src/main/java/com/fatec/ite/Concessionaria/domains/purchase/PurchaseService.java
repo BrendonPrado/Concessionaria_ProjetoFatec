@@ -10,6 +10,8 @@ import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 public class PurchaseService extends GenericServiceImpl<Purchase> {
 
@@ -22,16 +24,14 @@ public class PurchaseService extends GenericServiceImpl<Purchase> {
     @Autowired
     private CarService carService;
 
+    @Transactional()
     public Purchase purchaseAd(PurchaseForm purchaseForm) throws ObjectNotFoundException {
         Ad ad = adService.findById(purchaseForm.getAdId());
         User buyer = userService.findById(purchaseForm.getBuyerId());
         Purchase purchase = Purchase.builder().buyer(buyer).saleCar(ad.getCar()).salesMan(ad.getSalesMan()).build();
-        //carService.addPurchase(ad.getCar(),purchase);
-        adService.setPurchased(ad);
-       carService.setNewOwner(buyer,ad.getCar());
-       // userService.addSaleAndBuy(ad.getSalesMan(),buyer,purchase);
-       Purchase persistedPurchase = save(purchase);
-       // System.out.println(persistedPurchase);
+        adService.setSold(ad);
+        carService.setNewOwner(buyer,ad.getCar());
+        Purchase persistedPurchase = save(purchase);
         return persistedPurchase;
     }
 }

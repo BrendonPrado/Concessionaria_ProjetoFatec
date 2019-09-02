@@ -2,14 +2,15 @@ package com.fatec.ite.Concessionaria.domains.purchase;
 
 import com.fatec.ite.Concessionaria.domains.car.Car;
 import com.fatec.ite.Concessionaria.domains.user.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Builder
 public class Purchase {
     @Id

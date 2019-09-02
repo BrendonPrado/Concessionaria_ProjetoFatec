@@ -29,7 +29,7 @@ public class AdController {
     }
 
     @GetMapping(value = "/{id}")
-    private ResponseEntity<Ad> find(@PathVariable Integer id) throws ObjectNotFoundException {
+    public ResponseEntity<Ad> find(@PathVariable Integer id) throws ObjectNotFoundException {
         return ResponseEntity.ok().body(service.findById(id));
     }
 }

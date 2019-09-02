@@ -8,6 +8,7 @@ import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 
 @Service
@@ -27,6 +28,7 @@ public class CarService extends GenericServiceImpl<Car> {
         save(car);
     }
 
+    @Transactional()
     public void setNewOwner(User buyer, Car car) {
         car.setUserOwner(buyer);
         repo.save(car);

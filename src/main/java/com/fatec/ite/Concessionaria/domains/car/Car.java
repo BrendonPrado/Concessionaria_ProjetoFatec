@@ -24,10 +24,12 @@ public class Car {
 
     @NonNull
     private String brand;
+
     @NonNull
     private String model;
 
     @NonNull
+    @Column(unique = true,nullable = false)
     private String plate;
 
     @NonNull

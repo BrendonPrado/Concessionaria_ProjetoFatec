@@ -26,9 +26,11 @@ public class User {
     private String fullName;
 
     @NonNull
+    @Column(nullable = false,unique = true)
     private String email;
 
     @NonNull
+    @Column(unique = true)
     private String cpf;
 
     @NonNull

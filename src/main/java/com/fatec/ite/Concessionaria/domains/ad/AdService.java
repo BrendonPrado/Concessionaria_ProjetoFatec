@@ -1,9 +1,6 @@
 package com.fatec.ite.Concessionaria.domains.ad;
 
 import com.fatec.ite.Concessionaria.domains.car.CarService;
-import com.fatec.ite.Concessionaria.domains.purchase.Purchase;
-import com.fatec.ite.Concessionaria.domains.purchase.PurchaseForm;
-import com.fatec.ite.Concessionaria.domains.purchase.PurchaseService;
 import com.fatec.ite.Concessionaria.domains.user.UserService;
 import com.fatec.ite.Concessionaria.generics.GenericServiceImpl;
 import javassist.tools.rmi.ObjectNotFoundException;
@@ -27,7 +24,7 @@ public class AdService extends GenericServiceImpl<Ad> {
         return persisted;
     }
 
-    public void setPurchased(Ad ad){
+    public void setSold(Ad ad){
         ad.setAdStatus(AdStatus.Sold);
         save(ad);
     }
@@ -37,7 +34,7 @@ public class AdService extends GenericServiceImpl<Ad> {
     }
 
     public List<Ad> findByPriceHigh(double price){
-        return ((AdRepository) this.repo).pegarMaiorQuePreco(price);
+        return ((AdRepository) this.repo).pegarMaiorPrecoQue(price);
     }
 
 

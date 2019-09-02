@@ -1,4 +1,4 @@
-package com.fatec.ite.Concession.riaECar;
+package com.fatec.ite.Concession.riaECar.domains.Ad;
 
 import com.fatec.ite.Concessionaria.ConcessionáriaECarApplication;
 import com.fatec.ite.Concessionaria.domains.ad.Ad;
@@ -47,7 +47,16 @@ public class AdRepositoryTest {
     @Test
     public void testaFindStatus(){
         List<Ad> ad = adRepository.findByAdStatus(AdStatus.Available);
+        System.out.println(adRepository.findAll().size());
         Assert.assertEquals(AdStatus.Available,ad.get(0).getAdStatus());
+    }
+
+    @Test
+    public void testaPegaPrecoMaior(){
+        List<Ad> ads = adRepository.pegarMaiorPrecoQue(1500);
+        ads.removeIf(a -> a.getPrice() <= 1500);
+        Assert.assertTrue(ads.size() > 0);
+        Assert.assertTrue(ads.get(0).getPrice() > 1500);
     }
 
 }
