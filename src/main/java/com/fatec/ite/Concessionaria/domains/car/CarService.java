@@ -1,15 +1,17 @@
 package com.fatec.ite.Concessionaria.domains.car;
 
+import javax.transaction.Transactional;
+
+import com.fatec.ite.Concessionaria.domains.ad.AdStatus;
 import com.fatec.ite.Concessionaria.domains.purchase.Purchase;
 import com.fatec.ite.Concessionaria.domains.user.User;
 import com.fatec.ite.Concessionaria.domains.user.UserService;
 import com.fatec.ite.Concessionaria.generics.GenericServiceImpl;
-import javassist.tools.rmi.ObjectNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.util.ArrayList;
+import javassist.tools.rmi.ObjectNotFoundException;
 
 @Service
 public class CarService extends GenericServiceImpl<Car> {
@@ -33,4 +35,14 @@ public class CarService extends GenericServiceImpl<Car> {
         car.setUserOwner(buyer);
         repo.save(car);
     }
+
+
+	public boolean carHasAdAvaible(Car car) {
+		return car.getCarsAd().stream().anyMatch(ad -> ad.getAdStatus().equals(AdStatus.Available));
+	}
+
+
+	public boolean sellerIsTheOwnerOfCar(Car car, User seller) {
+		return car.getUserOwner().getId() == seller.getId();
+	}
 }

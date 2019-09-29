@@ -1,5 +1,8 @@
 package com.fatec.ite.Concession.riaECar.domains.Ad;
 
+import java.util.Date;
+import java.util.List;
+
 import com.fatec.ite.Concessionaria.ConcessionáriaECarApplication;
 import com.fatec.ite.Concessionaria.domains.ad.Ad;
 import com.fatec.ite.Concessionaria.domains.ad.AdRepository;
@@ -8,6 +11,7 @@ import com.fatec.ite.Concessionaria.domains.car.Car;
 import com.fatec.ite.Concessionaria.domains.car.CarRepository;
 import com.fatec.ite.Concessionaria.domains.user.User;
 import com.fatec.ite.Concessionaria.domains.user.UserRepository;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,8 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.List;
 
 @RunWith(SpringRunner.class)
 @AutoConfigureMockMvc
@@ -41,13 +43,12 @@ public class AdRepositoryTest {
         car.setUserOwner(user);
         carRepository.save(car);
 
-        adRepository.save(new Ad(null,user,car,2000, AdStatus.Available));
+        adRepository.save(new Ad(null,user,car,2000, AdStatus.Available,new Date()));
     }
     
     @Test
     public void testaFindStatus(){
         List<Ad> ad = adRepository.findByAdStatus(AdStatus.Available);
-        System.out.println(adRepository.findAll().size());
         Assert.assertEquals(AdStatus.Available,ad.get(0).getAdStatus());
     }
 

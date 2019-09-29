@@ -1,16 +1,14 @@
 package com.fatec.ite.Concessionaria.domains.user;
 
+import java.util.Arrays;
+
 import com.fatec.ite.Concessionaria.domains.car.Car;
 import com.fatec.ite.Concessionaria.domains.car.CarService;
 import com.fatec.ite.Concessionaria.domains.purchase.Purchase;
 import com.fatec.ite.Concessionaria.generics.GenericServiceImpl;
 
-import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 @Service
 public class UserService extends GenericServiceImpl<User>{
