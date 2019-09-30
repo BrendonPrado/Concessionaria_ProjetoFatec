@@ -28,7 +28,7 @@ public class AdService extends GenericServiceImpl<Ad> {
     public Ad saveFromForm(AdForm adForm) throws ObjectNotFoundException {
         Car car = carService.findById(adForm.getCarId());
         User seller = userService.findById(adForm.getSalesManId());
-        if(existsByCar(car) && !carService.sellerIsTheOwnerOfCar(car,seller))
+        if(existsByCar(car) || !carService.sellerIsTheOwnerOfCar(car,seller))
             throw new DataIntegrityViolationException("Este carro já possui um anuncio de venda, ou não é seu para anunciar");
         Ad newAd = new Ad(null,seller,car,adForm.getPrice(),AdStatus.Available,new Date());
         Ad persisted = save(newAd);
